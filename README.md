@@ -1,2 +1,2 @@
 # cryptography-2
- second semester
+ second semester subject
