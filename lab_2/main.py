@@ -1,10 +1,11 @@
-from .helpers import random_prime, bezout
+from lab_2.helpers import random_prime, bezout
 from sympy import isprime
 import json
-from .. import Rand
+from lab_1 import Rand
 
 
 bit_size = 64
+r = Rand(23843824623634736)
 
 while True:
     p, q = random_prime(bit_size), random_prime(bit_size)
@@ -15,7 +16,7 @@ while True:
 
     phi = (q - 1) * (p - 1)
 
-    e = random.randint(2, phi - 1)
+    e = r.next_int(2, phi - 1)
     print(e)
 
     x, y, g = bezout(e, phi)

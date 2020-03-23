@@ -1,14 +1,21 @@
-import random
+from lab_1 import Rand
+
+
+r = Rand(7467465736573456)
 
 
 def random_prime(bit_size):
-    a = random.randint(2 ** (bit_size - 1), 2 ** bit_size - 1)
+    a = r.next_int(bit_size)
+
     if a % 2 == 0:
         a += 1
+
     while not miller_rabin(a):
-        a = random.randint(2 ** (bit_size - 1), 2 ** bit_size - 1)
+        a = r.next_int(bit_size)
+
         if a % 2 == 0:
             a += 1
+
     return a
 
 
@@ -20,7 +27,7 @@ def miller_rabin(n, k=10):
         s += 1
 
     for i in range(k):
-        a = random.randint(2, n - 1)
+        a = r.next_int(2, n - 1)
         x = pow(a, t, n)
         if x == 1 or x == n - 1:
             continue
@@ -44,6 +51,6 @@ def bezout(a, b):
     while b:
         q = a // b
         a, b = b, a % b
-        x, xx = xx, x - xx*q
-        y, yy = yy, y - yy*q
+        x, xx = xx, x - xx * q
+        y, yy = yy, y - yy * q
     return x, y, a

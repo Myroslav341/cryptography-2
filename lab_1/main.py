@@ -3,9 +3,9 @@ from matplotlib import pyplot as plt
 
 class Rand:
     def __init__(self, seed):
-        self.seed = seed
-        self.register_seed = [x for x in format(self.seed, 'b')]
-        self.register = []
+        self.__seed = seed
+        self.__register_seed = [x for x in format(self.__seed, 'b')]
+        self.__register = []
 
     def next_int(self, *args) -> int:
         if len(args) == 1:
@@ -14,7 +14,7 @@ class Rand:
             return self.__int_from_range(args[0], args[1])
 
     def __int_by_bit_size(self, bit_size: int) -> int:
-        if len(self.register) == 0 or len(self.register) < bit_size:
+        if len(self.__register) == 0 or len(self.__register) < bit_size:
             self.__init_register(bit_size)
         random = self.__next__()
         return random
@@ -28,21 +28,21 @@ class Rand:
         return min(a, b) + differ
 
     def __init_register(self, size):
-        self.register = [0 for _ in range(size)]
+        self.__register = [0 for _ in range(size)]
         j = 0
         for i in range(size):
-            self.register[i] = self.register_seed[j]
+            self.__register[i] = self.__register_seed[j]
             j += 1
-            if j == len(self.register_seed):
+            if j == len(self.__register_seed):
                 j = 0
 
     def __next__(self):
-        new = int(self.register[-1] != self.register[-2])
-        self.register = [str(new)] + self.register[:-1]
+        new = int(self.__register[-1] != self.__register[-2])
+        self.__register = [str(new)] + self.__register[:-1]
         return self.__int__()
 
     def __int__(self):
-        return int(''.join(self.register), 2)
+        return int(''.join(self.__register), 2)
 
     def __iter__(self):
         return self
@@ -51,7 +51,7 @@ class Rand:
         return self.__str__()
 
     def __str__(self):
-        return str(int(''.join(self.register), 2))
+        return str(int(''.join(self.__register), 2))
 
     def __eq__(self, other):
         return self.__int__() == other
