@@ -1,4 +1,3 @@
-from math import gcd
 import random
 
 
@@ -38,13 +37,3 @@ def miller_rabin(n, k=10):
         else:
             return False
     return True
-
-
-def bezout(a, b):
-    x, xx, y, yy = 1, 0, 0, 1
-    while b:
-        q = a // b
-        a, b = b, a % b
-        x, xx = xx, x - xx*q
-        y, yy = yy, y - yy*q
-    return x, y, a

@@ -42,7 +42,7 @@ def decode(coded_words: list):
 
 
 
-f = open('../2/keys.json', 'r')
+f = open('../lab_2/keys.json', 'r')
 
 data = json.load(f)
 public_keys = data['public']
