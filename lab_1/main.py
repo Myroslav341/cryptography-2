@@ -1,3 +1,4 @@
+import random
 from matplotlib import pyplot as plt
 
 
@@ -7,11 +8,23 @@ class Rand:
         self.__register_seed = [x for x in format(self.__seed, 'b')]
         self.__register = []
 
-    def next_int(self, *args) -> int:
+    def next_int(self, *args, prime=False) -> int:
         if len(args) == 1:
-            return self.__int_by_bit_size(args[0])
+            if not prime:
+                return self.__int_by_bit_size(args[0])
+
+            while True:
+                rand = self.__int_by_bit_size(args[0])
+                if self.__miller_rabin(rand):
+                    return rand
         else:
-            return self.__int_from_range(args[0], args[1])
+            if not prime:
+                return self.__int_from_range(args[0], args[1])
+
+            while True:
+                rand = self.__int_from_range(args[0], args[1])
+                if self.__miller_rabin(rand):
+                    return rand
 
     def __int_by_bit_size(self, bit_size: int) -> int:
         if len(self.__register) == 0 or len(self.__register) < bit_size:
@@ -35,6 +48,32 @@ class Rand:
             j += 1
             if j == len(self.__register_seed):
                 j = 0
+
+    def __miller_rabin(self, n, k=10):
+        s = 0
+        t = n - 1
+        while t % 2 == 0:
+            t = t // 2
+            s += 1
+
+        for i in range(k):
+            a = random.randint(2, n - 1)
+            x = pow(a, t, n)
+            if x == 1 or x == n - 1:
+                continue
+            ok = False
+            for j in range(s - 1):
+                x = x ** 2 % n
+                if x == 1:
+                    return False
+                if x == n - 1:
+                    ok = True
+                    break
+            if ok:
+                continue
+            else:
+                return False
+        return True
 
     def __next__(self):
         new = int(self.__register[-1] != self.__register[-2])

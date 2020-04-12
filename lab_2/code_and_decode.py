@@ -59,6 +59,9 @@ def decode(coded_words: list) -> list:
     decoded_words = []
     for word in coded_words:
         decoded_words.append(pow(word, private_keys[0], private_keys[1]))
+
+    print(decoded_words)
+
     return decoded_words
 
 

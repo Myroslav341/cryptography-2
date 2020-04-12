@@ -1,14 +1,14 @@
-from lab_2.helpers import random_prime, bezout
+from lab_2.helpers import bezout
 from sympy import isprime
 import json
 from lab_1 import Rand
 
 
-bit_size = 64
+bit_size = 1024
 r = Rand(23843824623634736)
 
 while True:
-    p, q = random_prime(bit_size), random_prime(bit_size)
+    p, q = r.next_int(bit_size, prime=True), r.next_int(bit_size, prime=True)
     print(f'p = {p}:{isprime(p)}, q = {q}:{isprime(p)}')
 
     n = q * p
