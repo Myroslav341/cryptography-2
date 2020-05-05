@@ -1,4 +1,4 @@
-def bezout(a, b):
+def euclid(a, b):
     x, xx, y, yy = 1, 0, 0, 1
     while b:
         q = a // b

@@ -1,8 +1,8 @@
 import json
 
 
-def load_keys():
-    f = open('../lab_2/keys.json', 'r')
+def load_keys(path: str):
+    f = open(path, 'r')
 
     data = json.load(f)
 
@@ -25,13 +25,18 @@ def text_to_numbers(text_to_code: str) -> str:
 
 
 def create_signature(text: str) -> str:
-    return str(pow(int(text), private_key[0], private_key[1]))
+    return str(pow(int(text), private_key_sender[0], private_key_sender[1]))
+
+
+def code_text(words: int) -> str:
+    return str(pow(words, public_key_receiver[0], public_key_receiver[1]))
 
 
 code_param = 100
-public_key, private_key = load_keys()
+public_key_sender, private_key_sender = load_keys('../lab_2/keys.json')
+public_key_receiver, private_key_receiver = load_keys('../lab_3/keys_receiver.json')
 
 message = input('your message: ')
 
 f = open('message_and_sign.txt', 'w')
-f.write('\n'.join([message, create_signature(text_to_numbers(message))]))
+f.write('\n'.join([code_text(int(text_to_numbers(message))), create_signature(text_to_numbers(message))]))

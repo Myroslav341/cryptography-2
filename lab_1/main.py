@@ -15,6 +15,7 @@ class Rand:
 
             while True:
                 rand = self.__int_by_bit_size(args[0])
+
                 if self.__miller_rabin(rand):
                     return rand
         else:
@@ -23,61 +24,75 @@ class Rand:
 
             while True:
                 rand = self.__int_from_range(args[0], args[1])
+
                 if self.__miller_rabin(rand):
                     return rand
 
     def __int_by_bit_size(self, bit_size: int) -> int:
-        if len(self.__register) == 0 or len(self.__register) < bit_size:
+        if len(self.__register) < bit_size:
             self.__init_register(bit_size)
+
         random = self.__next__()
+
         return random
 
     def __int_from_range(self, a, b) -> int:
         d = abs(b - a)
         bits = len(format(d, 'b'))
         differ = self.__int_by_bit_size(bits)
+
         while differ > d:
             differ = self.__int_by_bit_size(bits)
+
         return min(a, b) + differ
 
     def __init_register(self, size):
         self.__register = [0 for _ in range(size)]
         j = 0
+
         for i in range(size):
             self.__register[i] = self.__register_seed[j]
             j += 1
+
             if j == len(self.__register_seed):
                 j = 0
 
-    def __miller_rabin(self, n, k=10):
+    def __miller_rabin(self, n, k=2):
         s = 0
         t = n - 1
+
         while t % 2 == 0:
             t = t // 2
             s += 1
 
         for i in range(k):
             a = random.randint(2, n - 1)
+
             x = pow(a, t, n)
             if x == 1 or x == n - 1:
                 continue
-            ok = False
-            for j in range(s - 1):
-                x = x ** 2 % n
-                if x == 1:
-                    return False
-                if x == n - 1:
-                    ok = True
-                    break
-            if ok:
-                continue
             else:
                 return False
+
+            # ok = False
+            # for j in range(s - 1):
+            #     x = x ** 2 % n
+            #     if x == 1:
+            #         return False
+            #     if x == n - 1:
+            #         ok = True
+            #         break
+            # if ok:
+            #     continue
+            # else:
+            #     return False
         return True
 
     def __next__(self):
         new = int(self.__register[-1] != self.__register[-2])
+
         self.__register = [str(new)] + self.__register[:-1]
+
         return self.__int__()
 
     def __int__(self):
@@ -108,7 +123,7 @@ def test_bit_size():
     while True:
         rand = r.next_int(bit_size)
         k += 1
-        print(f'r = {rand}, bits = {len(format(rand, "b"))}')
+        # print(f'r = {rand}, bits = {len(format(rand, "b"))}')
         if rand == rand_first:
             break
         s.append(rand)
@@ -168,5 +183,11 @@ def test_by_range():
 
 
 if __name__ == '__main__':
-    test_bit_size()
-    # test_by_range()
+    import time
+
+    # start_time = time.time()
+    # r = Rand(387482656425726521000234901238948172501297512750932759175715402395126052645063457634564777)
+    # print(r.next_int(4096, prime=True))
+    # print(time.time() - start_time)
+    # test_bit_size()
+    test_by_range()
