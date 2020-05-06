@@ -185,9 +185,9 @@ def test_by_range():
 if __name__ == '__main__':
     import time
 
-    # start_time = time.time()
-    # r = Rand(387482656425726521000234901238948172501297512750932759175715402395126052645063457634564777)
-    # print(r.next_int(4096, prime=True))
+    start_time = time.time()
+    r = Rand(38748265642572389456656568172501297512750932759175715402395126052645063457634564777)
+    print(r.next_int(2048, prime=True))
     # print(time.time() - start_time)
     # test_bit_size()
-    test_by_range()
+    # test_by_range()
