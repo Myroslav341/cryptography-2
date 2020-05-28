@@ -1,0 +1,71 @@
+{
+    "transactions": [
+        {
+            "sender": "Init",
+            "receiver": "A",
+            "amount": 37226
+        },
+        {
+            "sender": "Init",
+            "receiver": "B",
+            "amount": 78461
+        },
+        {
+            "sender": "Init",
+            "receiver": "C",
+            "amount": 63055
+        },
+        {
+            "sender": "Init",
+            "receiver": "D",
+            "amount": 14212
+        },
+        {
+            "sender": "Init",
+            "receiver": "E",
+            "amount": 60316
+        },
+        {
+            "sender": "Init",
+            "receiver": "F",
+            "amount": 44359
+        },
+        {
+            "sender": "Init",
+            "receiver": "G",
+            "amount": 93694
+        },
+        {
+            "sender": "Init",
+            "receiver": "H",
+            "amount": 49343
+        },
+        {
+            "sender": "Init",
+            "receiver": "K",
+            "amount": 81835
+        },
+        {
+            "sender": "Init",
+            "receiver": "L",
+            "amount": 83139
+        },
+        {
+            "sender": "Init",
+            "receiver": "M",
+            "amount": 79971
+        },
+        {
+            "sender": "Init",
+            "receiver": "N",
+            "amount": 71868
+        },
+        {
+            "sender": "Init",
+            "receiver": "O",
+            "amount": 75092
+        }
+    ],
+    "nonce": 0,
+    "previous_hash": 0
+}

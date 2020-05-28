@@ -57,7 +57,7 @@ class Rand:
             if j == len(self.__register_seed):
                 j = 0
 
-    def __miller_rabin(self, n, k=2):
+    def __miller_rabin(self, n, k=1):
         s = 0
         t = n - 1
 
@@ -186,8 +186,8 @@ if __name__ == '__main__':
     import time
 
     start_time = time.time()
-    r = Rand(38748265642572389456656568172501297512750932759175715402395126052645063457634564777)
-    print(r.next_int(2048, prime=True))
+    r = Rand(38748265642572389456656568172501297512750932759175715402395126052645063457634564777232345)
+    print(r.next_int(1024, prime=True))
     # print(time.time() - start_time)
     # test_bit_size()
     # test_by_range()
